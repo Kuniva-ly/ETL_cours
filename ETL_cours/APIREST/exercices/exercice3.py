@@ -51,3 +51,28 @@ for post in posts_user_1[:10]:
     
 df_posts = pd.DataFrame(posts_data)
 print(df_posts)
+
+
+todos_url = f"{BASE_URL}/todos"
+response_todos = requests.get(todos_url)
+
+
+todos_data = []
+for todos in response_todos.json():
+    todos_id = todos['id']
+    todos_title = todos['title']
+    todos_status = todos["completed"]
+    todos_data.append({
+        'todos_id': todos_id,
+        'todos_title': todos_title,
+        'Status': todos_status
+    })
+    
+df_todos = pd.DataFrame(todos_data)
+True_df = df_todos.loc[df_todos['Status'] == True]
+False_df = df_todos.loc[df_todos['Status'] == False]
+# print(df_todos)
+with pd.ExcelWriter('api_rapport.xlsx') as writer:
+    True_df.to_excel(writer, sheet_name='todos True', index=False)
+    False_df.to_excel(writer, sheet_name='todos False', index=False)
+    
