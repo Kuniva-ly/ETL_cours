@@ -65,12 +65,12 @@ for todos in response_todos.json():
     todos_data.append({
         'todos_id': todos_id,
         'todos_title': todos_title,
-        'Status': todos_status
+        'status': todos_status
     })
     
 df_todos = pd.DataFrame(todos_data)
-True_df = df_todos.loc[df_todos['Status'] == True]
-False_df = df_todos.loc[df_todos['Status'] == False]
+True_df = df_todos.loc[df_todos['status'] == True]
+False_df = df_todos.loc[df_todos['status'] == False]
 # print(df_todos)
 with pd.ExcelWriter('api_rapport.xlsx') as writer:
     True_df.to_excel(writer, sheet_name='todos True', index=False)
