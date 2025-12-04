@@ -75,4 +75,3 @@ False_df = df_todos.loc[df_todos['status'] == False]
 with pd.ExcelWriter('api_rapport.xlsx') as writer:
     True_df.to_excel(writer, sheet_name='todos True', index=False)
     False_df.to_excel(writer, sheet_name='todos False', index=False)
-    
